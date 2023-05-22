@@ -10,16 +10,22 @@
           <div class="relative">
             <select id="country"
               class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
-              <option>Select a country</option>
-              <option>United States</option>
-              <option>Canada</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
-              <option>Mexico</option>
+              <option>Animal Kingdom</option>
+              <option>Aulani</option>
+              <option>Bay Lake Tower</option>
+              <option>Beach Club</option>
+              <option>Boardwark</option>
+              <option>Boulder Ridge</option>
+              <option>Copper Creek</option>
+              <option>Grand Ca</option>
+              <option>Grand Floridian</option>
+              <option>Hilton Head</option>
+              <option>Old Key West</option>
+              <option>Old Key West (2057)</option>
+              <option>Polynesian</option>
+              <option>Riviera</option>
+              <option>Saratoga Springs</option>
+              <option>Vero Beach</option>
             </select>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <i class="fas fa-angle-down"></i>
