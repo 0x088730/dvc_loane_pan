@@ -65,32 +65,6 @@
             <li class="list-circle">Finance for up to 12 years</li>
             <li class="list-circle">No loan points reported to credit bureaus</li>
             <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
           </ul>
         </div>
       </div>
