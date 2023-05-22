@@ -5,32 +5,33 @@
       <div class="w-1/3 bg-gray-100 p-4 rounded-tl-[20px] rounded-bl-[20px]">
         <div>
           <label class="block mb-2 font-bold text-gray-700" for="country">
-            Country
+            DVC Sales Customer?
           </label>
           <div class="relative">
-            <select id="country"
-              class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
-              <option>Animal Kingdom</option>
-              <option>Aulani</option>
-              <option>Bay Lake Tower</option>
-              <option>Beach Club</option>
-              <option>Boardwark</option>
-              <option>Boulder Ridge</option>
-              <option>Copper Creek</option>
-              <option>Grand Ca</option>
-              <option>Grand Floridian</option>
-              <option>Hilton Head</option>
-              <option>Old Key West</option>
-              <option>Old Key West (2057)</option>
-              <option>Polynesian</option>
-              <option>Riviera</option>
-              <option>Saratoga Springs</option>
-              <option>Vero Beach</option>
+            <select id="country" v-model="selectedOption" class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
+              <option value="Animal Kingdom">Animal Kingdom</option>
+              <option value="Aulani">Aulani</option>
+              <option value="Bay Lake Tower">Bay Lake Tower</option>
+              <option value="Beach Club">Beach Club</option>
+              <option value="Boardwark">Boardwark</option>
+              <option value="Boulder Ridge">Boulder Ridge</option>
+              <option value="Copper Creek">Copper Creek</option>
+              <option value="Grand Ca">Grand Ca</option>
+              <option value="Grand Floridian">Grand Floridian</option>
+              <option value="Hilton Head">Hilton Head</option>
+              <option value="Old Key West">Old Key West</option>
+              <option value="Old Key West (2057)">Old Key West (2057)</option>
+              <option value="Polynesian">Polynesian</option>
+              <option value="Riviera">Riviera</option>
+              <option value="Saratoga Springs">Saratoga Springs</option>
+              <option value="Vero Beach">Vero Beach</option>
             </select>
+            <p>You selected {{ selectedOption }}</p>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <i class="fas fa-angle-down"></i>
             </div>
           </div>
+
         </div>
         <br>
         <div class="w-full flex">
@@ -78,6 +79,7 @@ export default {
   data() {
     return {
       scrollPosition: 0,
+      selectedOption: ''
     };
   },
 
