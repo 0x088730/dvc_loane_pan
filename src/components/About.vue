@@ -117,25 +117,84 @@
           </div>
           <br>
           <div class="flex justify-between">
-            <div class="text-[12px] border-1 border-gray-600 m-1 rounded-1 px-1" v-for="(item, index) in CreditOptions" :key="index" :data="item" :class="{ 'activeBtn': index === BlueIndex }">
-            {{ item.name }}
+            <div class="text-[12px] border-1 border-gray-600 m-1 rounded-1 px-1" v-for="(item, index) in CreditOptions"
+              :key="index" :data="item" :class="{ 'activeBtn': index === BlueIndex }">
+              {{ item.name }}
             </div>
           </div>
         </div>
       </div>
       <!-- Explaination Resort -->
-      <div class="w-2/3 bg-gray-200 p-4 rounded-tr-[20px] rounded-br-[20px] flex justify-center items-center">
-        <div>
-          <div class="text-[24px]">
-            Use our instant quote tool to estimate your DVC financing options with Monera Financial.
+      <div class="w-2/3 bg-gray-100 p-4 rounded-tr-[20px] rounded-br-[20px] flex justify-around">
+        <div class="w-full">
+          <div class="p-2 flex gap-10">
+            <div v-for="(item, index) in CreditCheckOptions" class="w-1/2">
+              <div class="bg-blue-900 text-[20px] text-white font-bold p-3 rounded-t-[20px]">{{ item.title }}</div>
+              <div class="p-3 bg-white flex flex-col gap-2">
+                <div class="flex justify-between items-center">
+                  <span>Your Estimated Monthly Payment:</span>
+                  <span>${{ item.estimated }}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span>Interest Rate:</span>
+                  <span>{{ item.interestRate }}%</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span>Loan Term:</span>
+                  <span>${{ item.loanTerm }} Years</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span>Down Payment:</span>
+                  <span>${{ item.downPayment }} ({{item.downPaymentPercent}}%)</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span>Total Loan Amount:</span>
+                  <span>${{ item.totalLoan }}</span>
+                </div>
+                <div class="flex justify-between font-bold items-center">
+                  <span>Estimated Cash to Close:</span>
+                  <span>${{ item.cashToClose }}</span>
+                </div>
+                <div class="text-right cursor-pointer" @click="isShowDetail[index] = !isShowDetail[index]">
+                  Show details <font-awesome-icon :icon="['fa', 'fa-chevron-' + (isShowDetail[index] ? 'up' : 'down')]" />
+                </div>
+                <div v-if="isShowDetail[index]" class="border-gray-200 border-[10px] flex flex-col gap-2 p-2">
+                  <div class="flex justify-between items-center">
+                    <span>Down Payment</span>
+                    <span>${{ item.downPayment }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Loan Origination Fee</span>
+                    <span>${{ item.originationFee }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Total Title Company Closing Costs</span>
+                    <span>${{ item.titleCompanyFee }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Additional Financing Fees</span>
+                    <span>${{ item.addFinancingFee }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>- Lender Policy Fee</span>
+                    <span>${{ item.lenderPolFee }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>- Mortgage Recording Fees</span>
+                    <span>${{ item.motaRecordFee }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Deposit You Gave to Your Broker</span>
+                    <span>${{ item.depositBroker }}</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Annual Due at Closing</span>
+                    <span>${{ item.annualDue }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <ul class="list-disc list-inside">
-            <li class="list-circle">Competitive rates starting at 9.9%</li>
-            <li class="list-circle">No credit check required</li>
-            <li class="list-circle">Finance for up to 12 years</li>
-            <li class="list-circle">No loan points reported to credit bureaus</li>
-            <li class="list-circle">No prepayment penalty and no service fee</li>
-          </ul>
         </div>
       </div>
     </div>
@@ -143,8 +202,15 @@
 </template>
 
 <script>
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+library.add(faChevronUp, faChevronDown);
 export default {
   name: 'SliderRange',
+  components: {
+    FontAwesomeIcon
+  },
   props: {
     min: {
       type: Number,
@@ -161,7 +227,8 @@ export default {
     value: {
       type: Number,
       default: 60
-    }
+    },
+    showDetailCase: false
   },
   data() {
     return {
@@ -174,6 +241,7 @@ export default {
       toAnnualDue: 0,
       sliderValue: 50,
       currentValue: this.value,
+      isShowDetail: [false, false],
       items: [
         { id: 1, name: "Item 1" },
         { id: 2, name: "Item 2" },
@@ -199,11 +267,52 @@ export default {
         { id: 10, name: "10k" },
       ],
       CreditOptions: [
-        {id: 1, name: 'No Credit Check'},
-        {id: 2, name: 'Fair (600-)'},
-        {id: 3, name: 'Good (650-)'},
-        {id: 4, name: 'Great (700-)'},
-        {id: 5, name: 'Excellent (800-)'},
+        { id: 1, name: 'No Credit Check' },
+        { id: 2, name: 'Fair (600-)' },
+        { id: 3, name: 'Good (650-)' },
+        { id: 4, name: 'Great (700-)' },
+        { id: 5, name: 'Excellent (800-)' },
+      ],
+      CreditCheckOptions: [
+        {
+          id: 1,
+          title: 'No Credit Check Option',
+          estimated: 156,
+          interestRate: 12.9,
+          loanTerm: 10,
+          downPayment: 600,
+          downPaymentPercent: 5,
+          totalLoan: 11400,
+          cashToClose: 2562.19,
+          downPayment: 600,
+          originationFee: 199,
+          titleCompanyFee: 759,
+          addFinancingFee: 123,
+          lenderPolFee: 25,
+          motaRecordFee: 35,
+          depositBroker: 0,
+          annualDue: 880.99
+        },
+        {
+          id: 2,
+          title: 'Credit Check Option',
+          estimated: 156,
+          interestRate: 12.9,
+          loanTerm: 10,
+          downPayment: 600,
+          downPaymentPercent: 5,
+          totalLoan: 11400,
+          cashToClose: 2562.19,
+          downPayment: 600,
+          originationFee: 199,
+          titleCompanyFee: 759,
+          addFinancingFee: 123,
+          lenderPolFee: 25,
+          motaRecordFee: 35,
+          depositBroker: 0,
+          annualDue: 880.99
+        },
+
       ],
       BlueIndex: 0
     };
@@ -217,7 +326,8 @@ export default {
     updateDownValue: function (value) {
       this.currentDownValue = value;
       this.$emit('input', value);
-    }
+    },
+
   },
 };
 </script>
@@ -265,6 +375,7 @@ export default {
   text-align: center;
   color: #4B5563;
 }
+
 .activeBtn {
   background-color: rgb(40, 40, 85);
   color: white
