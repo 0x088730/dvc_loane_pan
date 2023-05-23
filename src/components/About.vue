@@ -141,7 +141,7 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Loan Term:</span>
-                  <span>${{ item.loanTerm }} Years</span>
+                  <span>${{ currentLoanTerm }} Years</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Down Payment:</span>
@@ -219,11 +219,11 @@ export default {
   props: {
     min: {
       type: Number,
-      default: 10
+      default: 1
     },
     max: {
       type: Number,
-      default: 100
+      default: 10
     },
     minDown: {
       type: Number,
@@ -235,7 +235,7 @@ export default {
     },
     step: {
       type: Number,
-      default: 10
+      default: 1
     },
     stepDown: {
       type: Number,
@@ -243,7 +243,7 @@ export default {
     },
     value: {
       type: Number,
-      default: 60
+      default: 1
     },
     valueDown: {
       type: Number,
@@ -276,6 +276,7 @@ export default {
       currentValue: this.value,
       currentDownValue: [this.valueDown, this.valueDown1],
       totalLoanAmount: [this.valueLoan,this.valueLoan1],
+      currentLoanTerm: 1,
       isShowDetail: [false, false],
       items: [
         { id: 1, name: "Item 1" },
@@ -353,7 +354,7 @@ export default {
 
   methods: {
     updateValue: function (value) {
-      this.currentValue = value;
+      this.currentLoanTerm = value;
     },
     updateDownValue: function (index, value) {
       console.log(index)
