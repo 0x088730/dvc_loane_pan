@@ -30,13 +30,13 @@
           <div class="text-white text-[13px]"></div>
         </div>
         <div class="w-1/3 p-4">
-          <div>Monera Financial</div>
-          <div>MAILING ADDRESS:</div>
-          <div>5937 S. Emerson Avenue, Suite 100 <br/> Indianapolis, IN 46237</div>
-          <div>
+          <div class="text-white">Monera Financial</div>
+          <div class="text-white">MAILING ADDRESS:</div>
+          <div class="text-white">5937 S. Emerson Avenue, Suite 100 <br/> Indianapolis, IN 46237</div>
+          <div class="text-white">
               1-855-DVC-FUND (382-3863)
           </div>
-          <div>info@monerafinancial.com</div>
+          <div class="text-white">info@monerafinancial.com</div>
         </div>
       </div>
     </div>
