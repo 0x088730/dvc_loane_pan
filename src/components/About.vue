@@ -124,7 +124,12 @@
           </div>
           <!-- DVC Sales Contract -->
           <div>
-            <div></div>
+            <div>
+              Did you purchase this contract from DVC Sales?
+            </div>
+            <div class="flex justify-center">
+              <span class="bg-blue-900 text-white px-4 py-2 mx-2 rounded-lg">Yes</span><span class="text-black border-gray-700 border-1 px-4 py-2 mx-2 rounded-lg">No</span>
+            </div>
           </div>
         </div>
       </div>
