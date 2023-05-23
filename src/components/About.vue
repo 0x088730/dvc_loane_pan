@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid w-3/5 relative">
-    <div class="flex">
+    <div class="flex shadow-lg">
       <!-- Setting Value -->
       <div class="w-1/3 bg-gray-100 p-4 rounded-tl-[20px] rounded-bl-[20px]">
         <div>
@@ -106,6 +106,22 @@
             </div>
           </div>
         </div>
+        <br>
+        <!-- Optional Credit Check -->
+        <div>
+          <div class="text-[16px]">
+            Optional Credit Check
+          </div>
+          <div class="text-[14px]">
+            Share your credit score with us to quality for<br /> potential savings
+          </div>
+          <br>
+          <div class="flex justify-between">
+            <div class="text-[12px] border-1 border-gray-600 m-1 rounded-1 px-1" v-for="(item, index) in CreditOptions" :key="index" :data="item" :class="{ 'activeBtn': index === BlueIndex }">
+            {{ item.name }}
+            </div>
+          </div>
+        </div>
       </div>
       <!-- Explaination Resort -->
       <div class="w-2/3 bg-gray-200 p-4 rounded-tr-[20px] rounded-br-[20px] flex justify-center items-center">
@@ -123,7 +139,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -182,7 +197,15 @@ export default {
         { id: 8, name: "8k" },
         { id: 9, name: "9k" },
         { id: 10, name: "10k" },
-      ]
+      ],
+      CreditOptions: [
+        {id: 1, name: 'No Credit Check'},
+        {id: 2, name: 'Fair (600-)'},
+        {id: 3, name: 'Good (650-)'},
+        {id: 4, name: 'Great (700-)'},
+        {id: 5, name: 'Excellent (800-)'},
+      ],
+      BlueIndex: 0
     };
   },
 
@@ -241,5 +264,9 @@ export default {
   font-size: 14px;
   text-align: center;
   color: #4B5563;
+}
+.activeBtn {
+  background-color: rgb(40, 40, 85);
+  color: white
 }
 </style>
