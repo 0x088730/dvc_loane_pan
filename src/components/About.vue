@@ -122,6 +122,10 @@
               {{ item.name }}
             </div>
           </div>
+          <!-- DVC Sales Contract -->
+          <div>
+            <div></div>
+          </div>
         </div>
       </div>
       <!-- Explaination Resort -->
