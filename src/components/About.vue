@@ -149,7 +149,7 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Total Loan Amount:</span>
-                  <span>${{ item.totalLoan }}</span>
+                  <span>${{ totalLoanAmount[index] = !purchaseprice ? 0 : purchaseprice - currentDownValue[index] }}</span>
                 </div>
                 <div class="flex justify-between font-bold items-center">
                   <span>Estimated Cash to Close:</span>
@@ -253,6 +253,14 @@ export default {
       type: Number,
       default: 0
     },
+    valueLoan: {
+      type: Number,
+      default: 1000
+    },
+    valueLoan1: {
+      type: Number,
+      default: 0
+    },
     showDetailCase: false
   },
   data() {
@@ -267,6 +275,7 @@ export default {
       sliderValue: 50,
       currentValue: this.value,
       currentDownValue: [this.valueDown, this.valueDown1],
+      totalLoanAmount: [this.valueLoan,this.valueLoan1],
       isShowDetail: [false, false],
       items: [
         { id: 1, name: "Item 1" },
@@ -308,7 +317,7 @@ export default {
           loanTerm: 10,
           downPayment: 0,
           downPaymentPercent: 5,
-          totalLoan: 11400,
+          // totalLoan: 0,
           cashToClose: 2562.19,
           originationFee: 199,
           titleCompanyFee: 759,
@@ -326,7 +335,7 @@ export default {
           loanTerm: 10,
           downPayment: 0,
           downPaymentPercent: 5,
-          totalLoan: 11400,
+          // totalLoan: 11400,
           cashToClose: 2562.19,
           originationFee: 199,
           titleCompanyFee: 759,
