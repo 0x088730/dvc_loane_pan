@@ -155,10 +155,10 @@
                   <span>Estimated Cash to Close:</span>
                   <span>${{ item.cashToClose }}</span>
                 </div>
-                <div class="text-right cursor-pointer" @click="isShowDetail[index] = !isShowDetail[index]">
+                <div class="text-right cursor-pointer" :class="{'mb-[30px]' : !isShowDetail[index]}" @click="isShowDetail[index] = !isShowDetail[index]">
                   Show details <font-awesome-icon :icon="['fa', 'fa-chevron-' + (isShowDetail[index] ? 'up' : 'down')]" />
                 </div>
-                <div v-if="isShowDetail[index]" class="border-gray-200 border-[10px] flex flex-col gap-2 p-2">
+                <div v-if="isShowDetail[index]" class="border-gray-200 border-[10px] flex flex-col gap-2 p-2 mb-5">
                   <div class="flex justify-between items-center">
                     <span>Down Payment</span>
                     <span>${{ item.downPayment }}</span>
@@ -191,6 +191,11 @@
                     <span>Annual Due at Closing</span>
                     <span>${{ item.annualDue }}</span>
                   </div>
+                </div>
+              </div>
+              <div class="flex justify-center -mt-[30px]">
+                <div class="bg-red-700 px-5 py-3 text-white text-[20px] rounded-[40px]">
+                  Apply Now
                 </div>
               </div>
             </div>
