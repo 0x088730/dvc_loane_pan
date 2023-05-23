@@ -8,7 +8,8 @@
             DVC Sales Customer?
           </label>
           <div class="relative">
-            <select id="country" v-model="selectedOption" class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
+            <select id="country" v-model="selectedOption"
+              class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
               <option value="Animal Kingdom">Animal Kingdom</option>
               <option value="Aulani">Aulani</option>
               <option value="Bay Lake Tower">Bay Lake Tower</option>
@@ -26,7 +27,6 @@
               <option value="Saratoga Springs">Saratoga Springs</option>
               <option value="Vero Beach">Vero Beach</option>
             </select>
-            <p>You selected {{ selectedOption }}</p>
             <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <i class="fas fa-angle-down"></i>
             </div>
@@ -38,20 +38,73 @@
           <div class="flex w-1/2 items-center justify-center">
             <div class="relative w-full">
               <input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="Number of Points"
-                class="p-2 w-full border rounded-md">
+                v-model="numberpoint" class="p-2 w-full border rounded-md">
             </div>
           </div>
           <div class="flex w-1/2 items-center justify-center">
 
             <div class="relative w-full">
-              <input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="Price per point"
+              <input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="$" v-model="perpoint"
                 class="p-2 w-full border rounded-md">
             </div>
           </div>
 
         </div>
         <div class="mt-4 ml-2 text-gray-500">
-          Purchase Price of Contract: $0.00
+          Purchase Price of Contract: $ {{ purchaseprice = numberpoint * perpoint }}
+        </div>
+        <br />
+        <div class="flex justify-between">
+          <div>Deposit Paid when you <br />signed the contract</div>
+          <div>
+            <input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="Price per point"
+              v-model="depositpaid" class="p-2 w-[100px] border rounded-md">
+          </div>
+        </div>
+        <br>
+        <div class="flex justify-between">
+          <div class="text-[14px] self-center">Annual Dues to <br> pay at closing&nbsp;</div>
+          <div><input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="Price per point"
+              v-model="fromAnnualDue" class="p-1 w-[100px] border rounded-md"></div>
+          <div class="text-[14px] self-center">or</div>
+          <div><input type="number" id="quantity" name="quantity" min="0" max="10" placeholder="Price per point"
+              v-model="toAnnualDue" class="p-1 w-[100px] border rounded-md"></div>
+        </div>
+        <br>
+        <!-- Finance Term (Years) Slider -->
+        <div>
+          Finance Term (Years)
+        </div>
+        <div>
+          <div>
+            <input type="range" class="slider-range w-full" :min="min" :max="max" :step="step" :value="value"
+              @input="updateValue($event.target.value)">
+            <div class="flex justify-between mx-1">
+              <div class="" v-for="item in items" :key="item.id" :data="item">
+                {{ item.id }}
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <br>
+        <!-- Down Payment Slider -->
+        <div>
+          <div class="text-[16px]">
+            Down Payment
+          </div>
+          <div class="text-[14px]">
+            Tell us how much of a down payment you're<br /> comfortable with
+          </div>
+          <div>
+            <input type="range" class="slider-range w-full" :min="min" :max="max" :step="step" :value="value"
+              @input="updateDownValue($event.target.value)">
+            <div class="flex justify-between">
+              <div class="" v-for="item in DownItems" key="item.id" :data="item">
+                {{ item.name }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Explaination Resort -->
@@ -76,19 +129,117 @@
 
 <script>
 export default {
+  name: 'SliderRange',
+  props: {
+    min: {
+      type: Number,
+      default: 10
+    },
+    max: {
+      type: Number,
+      default: 100
+    },
+    step: {
+      type: Number,
+      default: 10
+    },
+    value: {
+      type: Number,
+      default: 60
+    }
+  },
   data() {
     return {
       scrollPosition: 0,
-      selectedOption: ''
+      purchaseprice: '',
+      numberpoint: 0,
+      perpoint: 0,
+      depositpaid: 0,
+      fromAnnualDue: 0,
+      toAnnualDue: 0,
+      sliderValue: 50,
+      currentValue: this.value,
+      items: [
+        { id: 1, name: "Item 1" },
+        { id: 2, name: "Item 2" },
+        { id: 3, name: "Item 3" },
+        { id: 4, name: "Item 4" },
+        { id: 5, name: "Item 5" },
+        { id: 6, name: "Item 6" },
+        { id: 7, name: "Item 7" },
+        { id: 8, name: "Item 8" },
+        { id: 9, name: "Item 9" },
+        { id: 10, name: "Item 10" },
+      ],
+      DownItems: [
+        { id: 1, name: "1k" },
+        { id: 2, name: "2k" },
+        { id: 3, name: "3k" },
+        { id: 4, name: "4k" },
+        { id: 5, name: "5k" },
+        { id: 6, name: "6k" },
+        { id: 7, name: "7k" },
+        { id: 8, name: "8k" },
+        { id: 9, name: "9k" },
+        { id: 10, name: "10k" },
+      ]
     };
   },
 
   methods: {
-    handleScroll(e) {
-
+    updateValue: function (value) {
+      this.currentValue = value;
+      this.$emit('input', value);
     },
+    updateDownValue: function (value) {
+      this.currentDownValue = value;
+      this.$emit('input', value);
+    }
   },
 };
 </script>
 
-<style></style>
+<style>
+.slider-range {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 2px;
+  border-radius: 5px;
+  background: #2573e7;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider-range:hover {
+  opacity: 1;
+}
+
+.slider-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4B5563;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.slider-range::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4B5563;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.value {
+  margin-top: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #4B5563;
+}
+</style>
