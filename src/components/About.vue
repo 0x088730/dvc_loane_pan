@@ -72,8 +72,16 @@
         </div>
         <br>
         <!-- Finance Term (Years) Slider -->
-        <div>
-          Finance Term (Years)
+        <div class="flex justify-between items-center">
+          <div>
+            Finance Term (Years)
+          </div>
+          <div>
+            <span><font-awesome-icon class="text-[34px] cursor-pointer"
+                :icon="['fa', 'fa-caret-left']" /></span>
+            <span><font-awesome-icon class="text-[34px] cursor-pointer"
+                :icon="['fa', 'fa-caret-right']" /></span>
+          </div>
         </div>
         <div>
           <div>
@@ -90,15 +98,26 @@
         <br>
         <!-- Down Payment Slider -->
         <div>
-          <div class="text-[16px]">
-            Down Payment
-          </div>
-          <div class="text-[14px]">
-            Tell us how much of a down payment you're<br /> comfortable with
+          <div class="flex justify-between items-center">
+            <div>
+              <div class="text-[16px]">
+                Down Payment
+              </div>
+              <div class="text-[14px]">
+                Tell us how much of a down <br /> payment you're comfortable with
+              </div>
+            </div>
+            <!-- @click="isShowDetail[index] = !isShowDetail[index]">
+                  Show details <font-awesome-icon :icon="['fa', 'fa-chevron-' + (isShowDetail[index] ? 'up' : 'down')]" -->
+            <div class="mt-[20px]">
+              <span @click="updateDownArrowValue1('0', $event)"><font-awesome-icon class="text-[34px] cursor-pointer"
+                  :icon="['fa', 'fa-caret-left']"/></span>
+              <span @click="updateDownArrowValue('0', $event)"><font-awesome-icon class="text-[34px] cursor-pointer"
+                  :icon="['fa', 'fa-caret-right']" /></span>
+            </div>
           </div>
           <div>
-            <input type="range" class="slider-range w-full" :min="minDown" :max="maxDown" :step="stepDown" :value="valueDown"
-              @input="updateDownValue(0, $event.target.value)">
+            <input type="range" class="slider-range w-full" :min="minDown" :max="maxDown" :step="stepDown" v-model="rangeValue" @input="updateDownValue(0, $event.target.value)">
             <div class="flex justify-between">
               <div class="" v-for="item in DownItems" key="item.id" :data="item">
                 {{ item.name }}
@@ -123,8 +142,14 @@
             </div>
           </div>
           <!-- DVC Sales Contract -->
-          <div>
-            <div></div>
+          <div class="mt-[20px]">
+            <div>
+              Did you purchase this contract from DVC Sales?
+            </div>
+            <div class="flex justify-center">
+              <span class="bg-blue-900 text-white px-4 py-2 mx-2 rounded-lg">Yes</span><span
+                class="text-black border-gray-700 border-1 px-4 py-2 mx-2 rounded-lg">No</span>
+            </div>
           </div>
         </div>
       </div>
@@ -149,17 +174,19 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Down Payment:</span>
-                  <span>${{ currentDownValue[index] }} ({{item.downPaymentPercent}}%)</span>
+                  <span>${{ currentDownValue[index] }} ({{ item.downPaymentPercent }}%)</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Total Loan Amount:</span>
-                  <span>${{ totalLoanAmount[index] = !purchaseprice ? 0 : purchaseprice - currentDownValue[index] }}</span>
+                  <span>${{ totalLoanAmount[index] = !purchaseprice ? 0 : purchaseprice - currentDownValue[index]
+                  }}</span>
                 </div>
                 <div class="flex justify-between font-bold items-center">
                   <span>Estimated Cash to Close:</span>
                   <span>${{ item.cashToClose }}</span>
                 </div>
-                <div class="text-right cursor-pointer" :class="{'mb-[30px]' : !isShowDetail[index]}" @click="isShowDetail[index] = !isShowDetail[index]">
+                <div class="text-right cursor-pointer" :class="{ 'mb-[30px]': !isShowDetail[index] }"
+                  @click="isShowDetail[index] = !isShowDetail[index]">
                   Show details <font-awesome-icon :icon="['fa', 'fa-chevron-' + (isShowDetail[index] ? 'up' : 'down')]" />
                 </div>
                 <div v-if="isShowDetail[index]" class="border-gray-200 border-[10px] flex flex-col gap-2 p-2 mb-5">
@@ -213,8 +240,9 @@
 <script>
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-import { faChevronUp, faChevronDown } from "@fortawesome/free-solid-svg-icons";
-library.add(faChevronUp, faChevronDown);
+import { faChevronUp, faChevronDown, faCaretLeft, faCaretRight } from "@fortawesome/free-solid-svg-icons";
+import { mapState } from 'vuex'
+library.add(faChevronUp, faChevronDown, faCaretLeft, faCaretRight);
 export default {
   name: 'SliderRange',
   components: {
@@ -249,10 +277,10 @@ export default {
       type: Number,
       default: 1
     },
-    valueDown: {
-      type: Number,
-      default: 1000
-    },
+    // valueDown: {
+    //   type: Number,
+    //   default: 1000
+    // },
     valueDown1: {
       type: Number,
       default: 0
@@ -278,8 +306,8 @@ export default {
       toAnnualDue: 0,
       sliderValue: 50,
       currentValue: this.value,
-      currentDownValue: [this.valueDown, this.valueDown1],
-      totalLoanAmount: [this.valueLoan,this.valueLoan1],
+      currentDownValue: [this.rangeValue, this.valueDown1],
+      totalLoanAmount: [this.valueLoan, this.valueLoan1],
       currentLoanTerm: 1,
       isShowDetail: [false, false],
       items: [
@@ -352,19 +380,33 @@ export default {
         },
 
       ],
-      BlueIndex: 0
+      BlueIndex: 0,
+      rangeValue: 1000
     };
   },
+  computed: mapState(['counter']),
 
   methods: {
     updateValue: function (value) {
       this.currentLoanTerm = value;
     },
     updateDownValue: function (index, value) {
-      console.log(index)
+      console.log(value)
+      console.log('rangeValue', this.rangeValue)
       this.currentDownValue[index] = value;
     },
-
+    updateDownArrowValue: function (index, value) {
+      if(this.rangeValue < 10000) {
+        this.rangeValue = parseInt(this.rangeValue) + 1000;
+        this.currentDownValue[index] = this.rangeValue;
+      } 
+    },
+    updateDownArrowValue1: function(index, value) {
+      if(this.rangeValue >= 1000) {
+        this.rangeValue = parseInt(this.rangeValue) - 1000;
+        this.currentDownValue[index] = this.rangeValue;
+      }
+    }
   },
 };
 </script>
@@ -415,5 +457,4 @@ export default {
 .activeBtn {
   background-color: rgb(40, 40, 85);
   color: white
-}
-</style>
+}</style>
