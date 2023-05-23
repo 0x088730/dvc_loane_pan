@@ -8,11 +8,13 @@ import './style/home.css';
 import './style/tailwind.css';
 import { MotionPlugin } from '@vueuse/motion'
 import twElements from 'tw-elements';
+import store from './store'
 import jQuery from "jquery";
 const $ = jQuery;
 window.$ = $;
 const app = createApp(App);
 app.use(MotionPlugin);
 app.use(router);
+app.use(store)
 app.use(twElements)
 app.mount("#app");
