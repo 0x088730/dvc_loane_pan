@@ -357,7 +357,6 @@ export default {
 
 <style>
 .slider-range {
-  -webkit-appearance: none;
   width: 100%;
   height: 2px;
   border-radius: 5px;
