@@ -97,8 +97,8 @@
             Tell us how much of a down payment you're<br /> comfortable with
           </div>
           <div>
-            <input type="range" class="slider-range w-full" :min="min" :max="max" :step="step" :value="value"
-              @input="updateDownValue($event.target.value)">
+            <input type="range" class="slider-range w-full" :min="minDown" :max="maxDown" :step="stepDown" :value="valueDown"
+              @input="updateDownValue(0, $event.target.value)">
             <div class="flex justify-between">
               <div class="" v-for="item in DownItems" key="item.id" :data="item">
                 {{ item.name }}
@@ -145,7 +145,7 @@
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Down Payment:</span>
-                  <span>${{ item.downPayment }} ({{item.downPaymentPercent}}%)</span>
+                  <span>${{ currentDownValue[index] }} ({{item.downPaymentPercent}}%)</span>
                 </div>
                 <div class="flex justify-between items-center">
                   <span>Total Loan Amount:</span>
@@ -220,13 +220,33 @@ export default {
       type: Number,
       default: 100
     },
+    minDown: {
+      type: Number,
+      default: 1000
+    },
+    maxDown: {
+      type: Number,
+      default: 10000
+    },
     step: {
       type: Number,
       default: 10
     },
+    stepDown: {
+      type: Number,
+      default: 1000
+    },
     value: {
       type: Number,
       default: 60
+    },
+    valueDown: {
+      type: Number,
+      default: 1000
+    },
+    valueDown1: {
+      type: Number,
+      default: 0
     },
     showDetailCase: false
   },
@@ -241,6 +261,7 @@ export default {
       toAnnualDue: 0,
       sliderValue: 50,
       currentValue: this.value,
+      currentDownValue: [this.valueDown, this.valueDown1],
       isShowDetail: [false, false],
       items: [
         { id: 1, name: "Item 1" },
@@ -280,11 +301,10 @@ export default {
           estimated: 156,
           interestRate: 12.9,
           loanTerm: 10,
-          downPayment: 600,
+          downPayment: 0,
           downPaymentPercent: 5,
           totalLoan: 11400,
           cashToClose: 2562.19,
-          downPayment: 600,
           originationFee: 199,
           titleCompanyFee: 759,
           addFinancingFee: 123,
@@ -299,11 +319,10 @@ export default {
           estimated: 156,
           interestRate: 12.9,
           loanTerm: 10,
-          downPayment: 600,
+          downPayment: 0,
           downPaymentPercent: 5,
           totalLoan: 11400,
           cashToClose: 2562.19,
-          downPayment: 600,
           originationFee: 199,
           titleCompanyFee: 759,
           addFinancingFee: 123,
@@ -321,11 +340,10 @@ export default {
   methods: {
     updateValue: function (value) {
       this.currentValue = value;
-      this.$emit('input', value);
     },
-    updateDownValue: function (value) {
-      this.currentDownValue = value;
-      this.$emit('input', value);
+    updateDownValue: function (index, value) {
+      console.log(index)
+      this.currentDownValue[index] = value;
     },
 
   },
