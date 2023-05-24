@@ -10,22 +10,22 @@
                     <div class="relative">
                         <select id="country" v-model="selectedOption"
                             class="appearance-none py-2 pl-3 w-full pr-8 rounded leading-tight focus:outline-none focus:shadow-outline border-gray-300">
-                            <option value="Animal Kingdom">Animal Kingdom</option>
-                            <option value="Aulani">Aulani</option>
-                            <option value="Bay Lake Tower">Bay Lake Tower</option>
-                            <option value="Beach Club">Beach Club</option>
-                            <option value="Boardwark">Boardwark</option>
-                            <option value="Boulder Ridge">Boulder Ridge</option>
-                            <option value="Copper Creek">Copper Creek</option>
-                            <option value="Grand Ca">Grand Ca</option>
-                            <option value="Grand Floridian">Grand Floridian</option>
-                            <option value="Hilton Head">Hilton Head</option>
-                            <option value="Old Key West">Old Key West</option>
-                            <option value="Old Key West (2057)">Old Key West (2057)</option>
-                            <option value="Polynesian">Polynesian</option>
-                            <option value="Riviera">Riviera</option>
-                            <option value="Saratoga Springs">Saratoga Springs</option>
-                            <option value="Vero Beach">Vero Beach</option>
+                            <option value="animalKingdom">Animal Kingdom</option>
+                            <option value="aulani">Aulani</option>
+                            <option value="bayLakeTower">Bay Lake Tower</option>
+                            <option value="beachClub">Beach Club</option>
+                            <option value="boardwark">Boardwark</option>
+                            <option value="boulderRidge">Boulder Ridge</option>
+                            <option value="copperCreek">Copper Creek</option>
+                            <option value="grandCa">Grand Ca</option>
+                            <option value="grandFloridian">Grand Floridian</option>
+                            <option value="hiltonHead">Hilton Head</option>
+                            <option value="oldKeyWest">Old Key West</option>
+                            <option value="oldKeyWest2057">Old Key West (2057)</option>
+                            <option value="polynesian">Polynesian</option>
+                            <option value="riviera">Riviera</option>
+                            <option value="saratogaSprings">Saratoga Springs</option>
+                            <option value="veroBeach">Vero Beach</option>
                         </select>
                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                             <i class="fas fa-angle-down"></i>
@@ -356,7 +356,6 @@ export default {
                     loanTerm: 10,
                     downPayment: 0,
                     downPaymentPercent: 5,
-                    // totalLoan: 0,
                     cashToClose: 2562.19,
                     originationFee: 199,
                     titleCompanyFee: 759,
@@ -374,7 +373,6 @@ export default {
                     loanTerm: 10,
                     downPayment: 0,
                     downPaymentPercent: 5,
-                    // totalLoan: 11400,
                     cashToClose: 2562.19,
                     originationFee: 199,
                     titleCompanyFee: 759,
